@@ -17,9 +17,11 @@ phases:
   build:
     commands:
       - IMAGE_NAME=awscli-test
-      - docker run -e AWS_DEFAULT_REGION -e AWS_CONTAINER_CREDENTIALS_RELATIVE_URI $IMAGE_NAME aws s3 ls && aws sts get-caller-identity
-      # - docker run --rm -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -e AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION $IMAGE_NAME aws s3 ls
-
+      # The following command works:
+      # - docker run -e AWS_DEFAULT_REGION -e AWS_CONTAINER_CREDENTIALS_RELATIVE_URI $IMAGE_NAME aws s3 ls && aws sts get-caller-identity
+      # Testing Cx's command
+      - docker exec -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} -e AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}  ${CONTAINER_NAME} aws --version && aws sts get-caller-identity
+      
 artifacts:
   files:
     - "**/*"
