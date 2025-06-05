@@ -1,0 +1,25 @@
+version: 0.2
+
+env: 
+  variables: 
+    IMAGE_NAME: awscli-test
+
+phases: 
+  pre_build: 
+    commands:
+      - echo $AWS_ACCESS_KEY_ID
+      - echo $AWS_SECRET_ACCESS_KEY
+      - echo $AWS_SESSION_TOKEN
+      - docker build $IMAGE_NAME
+  build:
+    commands:
+      - docker run --rm \
+        -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+        -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
+        -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN
+        -e AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION \
+        $IMAGE_NAME s3 ls
+
+artifacts:
+  files:
+    - "**/*"
