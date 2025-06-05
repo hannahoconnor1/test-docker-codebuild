@@ -23,7 +23,8 @@ phases:
       # Testing Cx's command
       - echo $CONTAINER_NAME
       - docker run -d --name $CONTAINER_NAME $IMAGE_NAME
-      - docker exec -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} -e AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN} ${CONTAINER_NAME} /bin/bash -c "aws --version && aws sts get-caller-identity"
+      - docker ps
+      - docker exec -e AWS_CONTAINER_CREDENTIALS_RELATIVE_URI ${CONTAINER_NAME} /bin/bash -c "aws --version && aws sts get-caller-identity"
       
 artifacts:
   files:
