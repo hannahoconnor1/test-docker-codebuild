@@ -9,4 +9,4 @@ RUN yum install -y unzip curl && curl "https://awscli.amazonaws.com/awscli-exe-l
   rm -rf awscliv2.zip aws
 
 
-CMD [ "aws", "--version" ]
+CMD [ "sleep", "3600" ]
