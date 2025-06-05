@@ -13,11 +13,11 @@ phases:
       - echo $AWS_ACCESS_KEY_ID
       - echo $AWS_SECRET_ACCESS_KEY
       - echo $AWS_SESSION_TOKEN
-      - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+      - docker build -t $IMAGE_NAME .
   build:
     commands:
       - IMAGE_NAME=awscli-test
-      - docker run -e AWS_DEFAULT_REGION -e AWS_CONTAINER_CREDENTIALS_RELATIVE_URI $IMAGE_TAG aws s3 ls
+      - docker run -e AWS_DEFAULT_REGION -e AWS_CONTAINER_CREDENTIALS_RELATIVE_URI $IMAGE_NAME aws s3 ls
       # - docker run --rm -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN -e AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION $IMAGE_NAME aws s3 ls
 
 artifacts:
