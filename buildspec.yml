@@ -10,7 +10,7 @@ phases:
       - echo $AWS_ACCESS_KEY_ID
       - echo $AWS_SECRET_ACCESS_KEY
       - echo $AWS_SESSION_TOKEN
-      - docker build $IMAGE_NAME
+      - docker build -t $IMAGE_NAME .
   build:
     commands:
       - docker run --rm \
